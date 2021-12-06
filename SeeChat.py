@@ -184,7 +184,7 @@ class SeeChatMod(loader.Module):
                                     await message.client.send_message(chat.id, f"<b>Video from</b> <a href='tg://user?id={user.id}'>{user.first_name}</a>:")
                                     await message.client.send_file(chat.id, file)
                                     os.remove(file)
-                                    except:
+                                except:
                                         pass
                             elif message.audio:
                                 if message.sender_id == me.id:
