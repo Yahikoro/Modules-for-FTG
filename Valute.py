@@ -1,4 +1,4 @@
-# from telethon import events
+from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from .. import loader, utils
 import asyncio
