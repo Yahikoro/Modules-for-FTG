@@ -10,7 +10,7 @@ class AsserMod(loader.Module):
     strings={"name": "as"}
 
     async def ascmd(self, message):
-        """use: .ас to fast add in as list."""
+        """use: .аs to fast add in as list."""
 
         reply = await message.get_reply_message()
         send_mes = True
