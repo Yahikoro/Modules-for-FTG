@@ -31,17 +31,27 @@ class AsserMod(loader.Module):
 
         async with message.client.conversation(chat) as conv:
             for i in ids:
-                response = conv.wait_event(events.NewMessage(incoming=True, from_users=chat, chats=chat))
-                await message.client.send_message(chat, 'баны ' + i)
-                response = await response
-                if response.raw_text.lower().find('он в списке «ирис-антиспам»') != -1:
-                    sms += '\n❌ ' + f"<code>{i}</code>"
-                    await response.forward_to(message.to_id)
-                else:
-                    await asyncio.sleep(4)
-                    await message.client.send_message(chat, f"+ас {i}\n{args}")
-                    sms += '\n✅ ' + f"<code>{i}</code>"
-                await utils.answer(message, check_work + sms)
-                await asyncio.sleep(4)
+                sms += await self.yapedik(message, sms, i, check_work, conv, args)
             check_work = "checked!⌛️"
             await utils.answer(message, check_work+sms)
+
+    async def yapedik(self, message, sms, i, check_work, conv, args):
+        try:
+            response = conv.wait_event(events.NewMessage(incoming=True, from_users=chat, chats=chat))
+            await message.client.send_message(chat, 'баны ' + i)
+            response = await response
+            if response.raw_text.lower().find('он в списке «ирис-антиспам»') != -1:
+                sms += '\n❌ ' + f"<code>{i}</code>"
+                if message.chat_id != chat:
+                    await response.forward_to(message.to_id)
+            elif response.raw_text.lower().find('пользователь не найден') != -1:
+                sms += '\n⚠️ ' + f"<code>{i}</code>"
+            else:
+                await asyncio.sleep(4)
+                await message.client.send_message(chat, f"+негры {i}\n{args}")
+                sms += '\n✅ ' + f"<code>{i}</code>"
+            await utils.answer(message, check_work + sms)
+            await asyncio.sleep(4)
+            return sms
+        except:
+            return await self.yapedik(message, sms, i, check_work, conv, args)
