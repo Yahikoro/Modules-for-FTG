@@ -48,7 +48,7 @@ class AsserMod(loader.Module):
                 sms += '\n⚠️ ' + f"<code>{i}</code>"
             else:
                 await asyncio.sleep(4)
-                await message.client.send_message(chat, f"+негры {i}\n{args}")
+                await message.client.send_message(chat, f"+ас {i}\n{args}")
                 sms += '\n✅ ' + f"<code>{i}</code>"
             await utils.answer(message, check_work + sms)
             await asyncio.sleep(4)
